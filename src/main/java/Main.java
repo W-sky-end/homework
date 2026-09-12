@@ -3,49 +3,46 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int playerHealth = 100;
-        int monsterHealth = 120;
-        int playerDamage = 25;
-        int monsterDamage = 15;
+        int mHp = 100;
+        int pHp = 100;
+        int attack = 10;
         int choose;
-        while (monsterHealth > 0 && playerHealth > 0) {
+
+        while (pHp > 0 && mHp > 0) {
             do {
-                System.out.println("Your choose 1-3 for attack?");
+                System.out.println("Choose 1 or 2 for attack");
                 choose = sc.nextInt();
-            } while (choose < 1 || choose > 3);
+            } while (choose < 1 || choose > 2);
             switch (choose) {
                 case 1:
-                    monsterHealth -= playerDamage;
-                    System.out.println("Monster Health: " + monsterHealth);
-                    playerHealth -= monsterDamage;
-                    System.out.println("Player Health: " + playerHealth);
+                    mHp = calculateHealth(mHp, attack, 1);
+                    isAlive(mHp);
+                    System.out.println("Monster's health is " + mHp + "\nPlayer attacked monster on " + attack + " health");
                     break;
                 case 2:
-                    monsterHealth -= playerDamage * 2;
-                    System.out.println("Monster Health: " + monsterHealth);
-                    playerHealth -= monsterDamage;
-                    System.out.println("Player Health: " + playerHealth);
-                    break;
-                case 3:
-                    monsterHealth -= playerDamage * 3;
-                    System.out.println("Monster Health: " + monsterHealth);
-                    playerHealth -= monsterDamage;
-                    System.out.println("Player Health: " + playerHealth);
+                    mHp = calculateHealth(mHp, attack, 2);
+                    isAlive(mHp);
+                    System.out.println("Monster's health is " + mHp + "\nPlayer attacked monster on " + (attack * 2) + " health");
                     break;
                 default:
-                    System.out.println("Invalid choice. Try again.");
-                    break;
+                    System.out.println("Invalid choice");
             }
 
-            if (monsterHealth <= 0) {
-                monsterHealth = 0;
-                System.out.println("Monster is dead");
-            }
-            if (playerHealth <= 0) {
-                playerHealth = 0;
-                System.out.println("Player is dead");
-            }
+
         }
+
+    }
+
+    static int calculateDamage(int attack, int multiplayer) {
+        return attack * multiplayer;
+    }
+
+    static int calculateHealth(int pHp, int attack, int multiplayer) {
+        return pHp - calculateDamage(attack, multiplayer);
+    }
+
+    static boolean isAlive(int pHp) {
+        return pHp > 0;
     }
 }
 
