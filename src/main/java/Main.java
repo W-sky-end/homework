@@ -1,28 +1,28 @@
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
 
+        Map<Integer, String> items = new HashMap<>();
+        items.put(101, "Sword");
+        items.put(102, "Axe");
+        items.put(103, "Shield");
 
-        Set<String> inventory = new HashSet<String>();
-        inventory.add("Sword");
-        inventory.add("Axe");
-        inventory.add("Shield");
-        inventory.add("Sword");
+        items.put(102, "Legendary Axe");
+        items.remove(103);
 
-        System.out.println(inventory);
-        System.out.println(inventory.size());
-        System.out.println(inventory.contains("Sword"));
-        System.out.println(inventory.contains("Axe"));
-        inventory.remove("Axe");
-        System.out.println(inventory);
-        System.out.println(inventory.size());
+        for (Map.Entry<Integer, String> entry : items.entrySet()) {
+            if (entry.getKey() == 101) {
+                System.out.println("Key 101 = " + items.containsKey(101));
 
-        inventory.add("Sword");
-        inventory.add("Sword");
-        inventory.add("Sword");
+            }
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
 
-        
+        }
+
+
     }
 }
